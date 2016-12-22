@@ -3,6 +3,7 @@ var request = require('request'),
 
 module.exports = function(cb) {
   request('http://www.gasbuddy.com/USA', callback);
+  // request('https://www.gasbuddy.com/CAN', callback);
 
   function callback(err, res, body) {
     if (!err && res.statusCode === 200) {

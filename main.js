@@ -12,10 +12,13 @@ function callback(info) {
 }
 
 app.use(cors());
+app.get('/', function(req, res) {
+	res.json(stateGasPrices);
+});
 
 app.get('/:state', function(req, res){
 	var state = req.params.state;
-	res.json(stateGasPrices[state]);
+	res.send(stateGasPrices[state]);
 });
 
 app.listen(process.env.PORT || 8080, () => {
