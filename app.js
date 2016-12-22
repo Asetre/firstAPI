@@ -4,12 +4,6 @@ var request = require('request'),
 module.exports = function(cb) {
   request('http://www.gasbuddy.com/USA', callback);
 
-  app.use(function(req, res, next){
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
-
   function callback(err, res, body) {
     if (!err && res.statusCode === 200) {
       var $ = cheerio.load(body);
