@@ -3,22 +3,29 @@ const app = express();
 const cors = require('cors')
 
 var statePrices = require('./app.js');
+var provincePrices = require('./can.js');
 var stateGasPrices;
+var provinceGasPrices;
 
-statePrices(callback);
+statePrices(callbackUsa);
+provincePrices(callbackCanada);
 
-function callback(info) {
+function callbackUsa(info) {
 	stateGasPrices = info;
 }
 
+function callbackCanada(info) {
+	provinceGasPrices = info;
+}
+
 app.use(cors());
-app.get('/', function(req, res) {
+app.get('/USA', function(req, res) {
 	res.json(stateGasPrices);
 });
 
-app.get('/:state', function(req, res){
-	var state = req.params.state;
-	res.send(stateGasPrices[state]);
+app.get('/CAN', function(req, res) {
+	res.json(provinceGasPrices);
+
 });
 
 app.listen(process.env.PORT || 8080, () => {
